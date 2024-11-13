@@ -1,0 +1,37 @@
+# values.yaml
+
+replicaCount: 1
+
+# Image configuration
+image:
+  repository: nginx        # The container image repository
+  tag: ""                  # The tag for the image, defaulting to Chart AppVersion if empty
+  pullPolicy: IfNotPresent # Image pull policy
+
+# Service configuration
+service:
+  type: ClusterIP         # The type of Kubernetes Service (e.g., ClusterIP, NodePort, LoadBalancer)
+  port: 80                # Port that the service exposes
+
+# Pod annotations for metadata
+podAnnotations: 
+  example-annotation: "example-value" # Add custom annotations if needed
+
+# Additional labels for Deployment and Service
+labels: 
+  app: test-chart          # Label to identify the app, override as needed
+
+# Selector labels used for linking Service and Deployment resources
+selectorLabels:
+  app: test-chart          # Label selector, ensure consistency across templates
+
+# Liveness Probe settings (can be added under containers in deployment.yaml if desired)
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+  initialDelaySeconds: 3
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
